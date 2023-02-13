@@ -12,8 +12,8 @@ public class ProjectileExplosion : MonoBehaviour
 
     void OnCollisionEnter(Collision collision)
     {
-        Debug.Log(collision.contacts[0].point.ToString());
         doExplosion(collision.contacts[0].point);
+        Destroy(gameObject);
     }
 
     void doExplosion(Vector3 explosionPoint)
@@ -25,7 +25,7 @@ public class ProjectileExplosion : MonoBehaviour
             if(hitCol.GetComponent<Rigidbody>() != null)
             {
                 hitCol.GetComponent<Rigidbody>().isKinematic = false;
-                hitCol.GetComponent<Rigidbody>().AddExplosionForce(explosionForce, explosionPoint, blastRadius, 1, ForceMode.Impulse);
+                hitCol.GetComponent<Rigidbody>().AddExplosionForce(explosionForce, explosionPoint, blastRadius, .02f, ForceMode.Impulse);
             }
         }
     }

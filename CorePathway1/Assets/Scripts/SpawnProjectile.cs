@@ -6,12 +6,11 @@ public class SpawnProjectile : MonoBehaviour
 {
     public GameObject projectilePrefab;
     public float propulsionForce;
-
     private Transform myTransform;
 
     void Start()
     {
-        setInitialReferences();
+        myTransform = transform;
     }
 
     void Update()
@@ -24,13 +23,10 @@ public class SpawnProjectile : MonoBehaviour
 
     void summonProjectile()
     {
-        GameObject projectile = (GameObject)Instantiate(projectilePrefab, myTransform.transform.TransformPoint(0, 0, 2f), myTransform.rotation);
-        projectile.GetComponent<Rigidbody>().AddForce(myTransform.up * propulsionForce, ForceMode.Impulse);
+        GameObject projectile = (GameObject)Instantiate(projectilePrefab, myTransform.transform.TransformPoint(0, 0, 0.2f), myTransform.rotation);
+        projectile.GetComponent<Rigidbody>().AddForce(myTransform.forward * propulsionForce, ForceMode.Impulse);
         Destroy(projectile, 3);
     }
 
-    void setInitialReferences()
-    {
-
-    }
+    
 }
