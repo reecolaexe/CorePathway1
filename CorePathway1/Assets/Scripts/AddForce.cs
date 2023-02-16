@@ -6,12 +6,17 @@ public class AddForce : MonoBehaviour
 {
     Rigidbody rb;
     public float forceAdded;
+    private Collider[] hitColliders;
 
-    void OnCollisionEnter(Collider col)
+    void OnCollisionEnter(Collision col)
     {
-        if (Rigidbody.OnCollisionEnter(Collision))
+        foreach (Collider hitCol in hitColliders)
         {
-            
+            if (hitCol.GetComponent<Rigidbody>() != null)
+            {
+                hitCol.GetComponent<Rigidbody>().isKinematic = false;
+                hitCol.GetComponent<Rigidbody>().AddForce(transform.forward * forceAdded);
+            }
         }
     }
 }
