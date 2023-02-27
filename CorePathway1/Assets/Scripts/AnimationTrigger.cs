@@ -5,14 +5,12 @@ using UnityEngine;
 public class AnimationTrigger : MonoBehaviour
 {
     public Animator animController;
-    public string objectTag;
-    public string animTrigger;
 
     void onTriggerEnter(Collider other)
     {
-        if(other.CompareTag(objectTag)) 
+        if(other.CompareTag("Ball")) 
         {
-            animController.SetTrigger(animTrigger);
+            animController.SetTrigger("MovePlatform");
         }
     }
 }
