@@ -4,13 +4,23 @@ using UnityEngine;
 
 public class AnimationTrigger : MonoBehaviour
 {
-    public Animator animController;
+    public Animator anim;
+    public bool played = false;
 
-    void onTriggerEnter(Collider other)
+    void Start()
     {
-        if(other.CompareTag("Ball")) 
+        anim = GetComponent<Animator>();
+    }
+
+    void OnCollisionEnter(Collision col)
+    {
+        if(!played)
         {
-            animController.SetTrigger("MovePlatform");
+            if(col.gameObject.name == "Sphere")
+            {
+                anim.Play("PlatformMove7");
+                played = true;
+            }
         }
     }
 }
